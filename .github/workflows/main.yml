@@ -1,0 +1,21 @@
+name: Build and push Docker image
+on:
+  push:
+    branches:[ master ] 
+  pull_request:
+    branches:[ master ]
+jobs:
+  build: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Taking files 
+        uses: actions/checkout@v3 
+      - name: Login Docker account 
+        uses: docker/login-action@v2 
+        with:
+          username: "${{ secrets.DOCKER_NAME }}" 
+          password: "${{ secrets.DOCKER_PASSWORD }}" 
+      - name: Build and push 
+        run: | 
+          docker image build -t sayam2001/maven_pipeline:latest . 
+          docker push sayam2001/maven_pipeline:latest
