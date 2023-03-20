@@ -1,9 +1,7 @@
-FROM maven:3.5.4-jdk-8-alpine as maven
-COPY ./pom.xml ./pom.xml
-COPY ./src ./src
-RUN mvn dependency:go-offline -B
+FROM maven:3.8-openjdk-17-slim
+RUN mkdir /my_app
+COPY pom.xml /my_app/pom.xml
+COPY src /my_app/src
+WORKDIR my_app
 RUN mvn package
-FROM openjdk:8u171-jre-alpine
-WORKDIR /adevguide
-COPY --from=maven target/SimpleJavaProject-*.jar ./SimpleJavaProject.jar
-CMD ["java", "-jar", "./SimpleJavaProject.jar"]
+CMD ["java","-jar","target/maven-demo-0.1-SNAPSHOT.jar"]
