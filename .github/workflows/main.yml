@@ -26,14 +26,7 @@ jobs:
           docker push sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
           docker pull sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
 
-  installation:
-      needs: build
-      runs-on: ubuntu-latest
-      container:
-         image: sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
-      steps:
-            - name: updating packages
-              run: apt-get update -y
+ 
 
               
 
