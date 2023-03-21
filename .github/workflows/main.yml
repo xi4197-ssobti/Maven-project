@@ -18,10 +18,10 @@ jobs:
       - name: Build and push 
         run: | 
           
-          docker image build -t sayam2001/assignment1:$(git rev-parse --short=7 HEAD) .
+          docker image build -t sayam2001/assignment1 .
           docker tag sayam2001/assignment1 sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
-          docker push sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
-          docker pull sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+          docker push sayam2001/assignment1
+          docker pull sayam2001/assignment1
 
 
           
@@ -30,7 +30,7 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       container:
-         image: sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+         image: sayam2001/assignment1
       steps:
             - name: updating packages
               run: apt-get update -y
