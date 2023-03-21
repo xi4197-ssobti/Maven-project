@@ -18,7 +18,7 @@ jobs:
       - name: Build and push 
         run: | 
           
-          docker image build -t sayam2001/assignment1:latest
+          docker image build -t sayam2001/assignment1:latest .
           docker tag sayam2001/assignment1 sayam2001/assignment1:$(git log -1 --pretty=%h)
           docker push sayam2001/assignment1:$(git log -1 --pretty=%h)
           docker pull sayam2001/assignment1:latest
