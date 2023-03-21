@@ -21,7 +21,7 @@ jobs:
           password: "${{ secrets.DOCKER_PASSWORD }}" 
       - name: Build and push 
         run: | 
-          
+          echo "$version"
           docker image build -t sayam2001/assignment1:version .
           docker tag sayam2001/assignment1:latest sayam2001/assignment1:version
           docker push sayam2001/assignment1:version
