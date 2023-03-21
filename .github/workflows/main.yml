@@ -20,5 +20,4 @@ jobs:
           docker image build -t sayam2001/assignment1:latest . 
           docker push sayam2001/assignment1:latest
           docker pull sayam2001/assignment1:latest
-          docker run -it sayam2001/assignment:latest bash
-          docker run apt-get install git -y
+ 
