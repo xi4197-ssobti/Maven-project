@@ -5,8 +5,6 @@ on:
   pull_request:
     branches: [ master ]
     
-env:
-  version: $(git rev-parse --short=7 HEAD)
   
 jobs:
   build: 
@@ -23,16 +21,16 @@ jobs:
           password: "${{ secrets.DOCKER_PASSWORD }}" 
       - name: Build and push 
         run: | 
-          docker image build -t sayam2001/assignment1:version .
-          docker tag sayam2001/assignment1:latest sayam2001/assignment1:version
-          docker push sayam2001/assignment1:version
-          docker pull sayam2001/assignment1:version
+          docker image build -t sayam2001/assignment1.
+          docker tag sayam2001/assignment1:latest sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+          docker push sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+          docker pull sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
 
   installation:
       needs: build
       runs-on: ubuntu-latest
       container:
-         image: sayam2001/assignment1:version
+         image: sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
       steps:
             - name: updating packages
               run: apt-get update -y
