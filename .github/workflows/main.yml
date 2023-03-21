@@ -21,14 +21,14 @@ jobs:
           docker image build -t sayam2001/assignment1:latest .
           docker tag sayam2001/assignment1 sayam2001/assignment1:$(git log -1 --pretty=%h)
           docker push sayam2001/assignment1:$(git log -1 --pretty=%h)
-          docker pull sayam2001/assignment1:latest
+
           
   
   installation:
       needs: build
       runs-on: ubuntu-latest
       container:
-         image: sayam2001/assignment1:latest
+         image: sayam2001/assignment1:$(git log -1 --pretty=%h)
       steps:
             - name: updating packages
               run: apt-get update -y
