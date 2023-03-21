@@ -34,9 +34,6 @@ jobs:
       steps:
             - name: updating packages
               run: apt-get update -y
-            - name: installing git
-              run: apt-get install git -y
-            - name: git version
-              run: git --version
+
               
 
