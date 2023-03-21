@@ -20,5 +20,16 @@ jobs:
           docker image build -t sayam2001/assignment1:latest . 
           docker push sayam2001/assignment1:latest
           docker pull sayam2001/assignment1:latest
+  
+          installation:
+          needs: build
+          runs-on: ubuntu-latest
+            container:
+            image: sayam2001/assignment1:latest
+            steps:
+            - name: updating packages
+              run: apt-get update -y
+            - name: installing git
+              run: apt-get install git -y
           
 
