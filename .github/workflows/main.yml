@@ -31,7 +31,7 @@ jobs:
           docker pull sayam2001/assignment1:${{ steps.mysha.outputs.sha7 }}
 
  
-  installation:
+  updating:
       needs: build
       runs-on: ubuntu-latest
       container:
@@ -39,5 +39,15 @@ jobs:
       steps:
             - name: updating packages
               run: apt-get update -y
+              
+  
+  installing_git:
+      needs: updating
+      runs-on: ubuntu-latest
+      container:
+         image: sayam2001/assignment1:${{ needs.build.outputs.sha7 }}
+      steps:
+            - name: installing git
+              run: apt-get install git -y
               
 
