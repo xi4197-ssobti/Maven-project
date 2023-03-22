@@ -10,7 +10,7 @@ jobs:
   build: 
     runs-on: ubuntu-latest
     outputs:
-      sha7: ${{ steps.mysha.outputs.sha7 }}
+      sha7: ${{ steps.mysha.outputs.sha7 }}
     steps: 
       - name: Taking files 
         uses: actions/checkout@v3
@@ -26,16 +26,16 @@ jobs:
       - name: Build and push 
         run: | 
           docker image build -t sayam2001/assignment1 .
-          docker tag sayam2001/assignment1:latest sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
-          docker push sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
-          docker pull sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+          docker tag sayam2001/assignment1:latest sayam2001/assignment1:${{ steps.mysha.outputs.sha7 }}
+          docker push sayam2001/assignment1:${{ steps.mysha.outputs.sha7 }}
+          docker pull sayam2001/assignment1:${{ steps.mysha.outputs.sha7 }}
 
  
   installation:
       needs: build
       runs-on: ubuntu-latest
       container:
-         image: sayam2001/assignment1:$(git rev-parse --short=7 HEAD)
+         image: sayam2001/assignment1:${{ needs.build.outputs.sha7 }}
       steps:
             - name: updating packages
               run: apt-get update -y
