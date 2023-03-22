@@ -8,12 +8,16 @@ on:
   
 jobs:
   build: 
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+    outputs:
+      sha7: ${{ steps.mysha.outputs.sha7 }}
     steps: 
       - name: Taking files 
         uses: actions/checkout@v3
-      - name: Taking files 
-        run: echo "$version" 
+      - name: getshort
+        id: mysha
+        run: echo "sha7=$(git rev-parse --short=7 HEAD)" >> $GITHUB_OUTPUT
+
       - name: Login Docker account 
         uses: docker/login-action@v2 
         with:
